@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ObjectModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +21,21 @@ namespace WpfBootstrap
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window,INotifyPropertyChanged
     {
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
+
+            StudentProperty = new Student() { Name = "swaraj", Age = 32 };
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public Student StudentProperty { get; set; }
+        
+
+        
     }
 }

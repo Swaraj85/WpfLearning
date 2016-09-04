@@ -3,15 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:t="clr-namespace:System.Threading;assembly=mscorlib"
         xmlns:local="clr-namespace:WpfBootstrap"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBlock VerticalAlignment="Center" 
-                   HorizontalAlignment="Center" 
-                   Foreground="Green" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!--Bind to static resource-->
+        <TextBlock VerticalAlignment="Center"
+                   Grid.Row="0"
+                   HorizontalAlignment="Center"
+                   Foreground="Green"
+                   Text="{Binding Path=CurrentCulture, Source={x:Static t:Thread.CurrentThread}}"
                    FontSize="26">
-            Hello There <Hyperlink>WPF</Hyperlink>
         </TextBlock>
+        
+        <Button Grid.Row="1" Height="30" Width="100" Content="_Click"/>
+        <TextBox Grid.Row="2" Text="{Binding StudentProperty.Name,
+            UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
     </Grid>
 </Window>
